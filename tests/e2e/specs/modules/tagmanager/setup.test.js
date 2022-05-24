@@ -211,7 +211,7 @@ describe( 'Tag Manager module setup', () => {
 			// Ensure expected tag is placed.
 			await Promise.all( [
 				page.goto( createURL( '/' ) ),
-				// Will need fixing
+				// Will need fixing now
 				page.waitForNavigation(),
 			] );
 			await expect( page ).toMatchElement(
