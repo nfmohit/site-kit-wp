@@ -212,7 +212,7 @@ describe( 'Tag Manager module setup', () => {
 			await Promise.all( [
 				page.goto( createURL( '/' ) ),
 				// Will need fixing now, again
-				page.waitForNavigation( { waitUntil: 'domcontentloaded' } ),
+				page.waitForNavigation( { waitUntil: 'load' } ),
 			] );
 			await expect( page ).toMatchElement(
 				'script[src^="https://www.googletagmanager.com/gtm.js?id=GTM-ABCXYZ"]'
