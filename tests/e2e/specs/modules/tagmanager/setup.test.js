@@ -211,7 +211,10 @@ describe( 'Tag Manager module setup', () => {
 			// Ensure expected tag is placed.
 			await Promise.all( [
 				page.goto( createURL( '/' ) ),
-				page.waitForNavigation( { waitUntil: 'networkidle2', timeout: 0 } ),
+				page.waitForNavigation( {
+					waitUntil: 'networkidle2',
+					timeout: 0,
+				} ),
 			] );
 			await expect( page ).toMatchElement(
 				'script[src^="https://www.googletagmanager.com/gtm.js?id=GTM-ABCXYZ"]'
@@ -310,7 +313,10 @@ describe( 'Tag Manager module setup', () => {
 			// Ensure expected tag is placed.
 			await Promise.all( [
 				page.goto( createURL( '/' ) ),
-				page.waitForNavigation(),
+				page.waitForNavigation( {
+					waitUntil: 'networkidle2',
+					timeout: 0,
+				} ),
 			] );
 			await expect( page ).toMatchElement(
 				'script[src^="https://www.googletagmanager.com/gtm.js?id=GTM-BCDWXY"]'
