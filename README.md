@@ -1,5 +1,3 @@
-An update to trigger a workflow.
-
 # Site Kit by Google
 
 Site Kit is a one-stop solution for WordPress users to use everything Google has to offer to make them successful on the web.
