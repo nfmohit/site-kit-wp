@@ -47,11 +47,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: update-browserslist-database
     steps:
+      - name: Echo PR details
+        run: |
+          echo "HAS_PR -> ${{ needs.update-browserslist-database.outputs.has_pr }} | ${{ env.HAS_PR }}"
+          echo "PR_STATUS -> ${{ needs.update-browserslist-database.outputs.pr_status }} | ${{ env.PR_STATUS }}"
+          echo "PR_NUMBER -> ${{ needs.update-browserslist-database.outputs.pr_number }} | ${{ env.PR_NUMBER }}"
       - name: Move Zenhub card
-        if: ${{ env.HAS_PR == true && env.PR_STATUS == 'created' }}
+        # if: ${{ env.HAS_PR == true && env.PR_STATUS == 'created' }}
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://api.zenhub.com/p2/workspaces/${{ secrets.ZENHUB_WORKSPACE_ID }}/repositories/${{ secrets.REPOSITORY_ID }}/issues/${{ env.PR_NUMBER }}/moves'
+          url: 'https://api.zenhub.com/p2/workspaces/${{ secrets.ZENHUB_WORKSPACE_ID }}/repositories/${{ secrets.REPOSITORY_ID }}/issues/${{ needs.update-browserslist-database.outputs.pr_number }}/moves'
           method: 'POST'
           customHeaders: '{"Content-Type": "application/json", "X-Authentication-Token": "${{ secrets.ZENHUB_TOKEN }}"}'
           data: '{"pipeline_id": "${{ secrets.ZENHUB_MR_PIPELINE_ID }}", "position": "bottom"}'
