@@ -14,6 +14,8 @@ jobs:
     name: Create PR containing Browserslist updates
     runs-on: ubuntu-latest
     outputs:
+      has_pr: ${{ steps.run-update-action.outputs.has_pr }}
+      pr_status: ${{ steps.run-update-action.outputs.pr_status }}
       pr_number: ${{ steps.run-update-action.outputs.pr_number }}
     steps:
       - name: Checkout repository
