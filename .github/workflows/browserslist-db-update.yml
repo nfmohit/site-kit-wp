@@ -15,7 +15,7 @@ jobs:
         continue-on-error: true
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://api.github.com/repos/${{ github.repository }}/git/ref/update/browserslist-db'
+          url: 'https://api.github.com/repos/${{ github.repository }}/git/ref/heads/update/browserslist-db'
           method: 'GET'
           bearerToken: ${{ secrets.GITHUB_TOKEN }}
           customHeaders: '{"Accept": "application/vnd.github+json"}'
@@ -24,7 +24,7 @@ jobs:
         if: steps.check-branch.outcome == 'success'
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://api.github.com/repos/${{ github.repository }}/git/refs/update/browserslist-db'
+          url: 'https://api.github.com/repos/${{ github.repository }}/git/refs/heads/update/browserslist-db'
           method: 'DELETE'
           bearerToken: ${{ secrets.GITHUB_TOKEN }}
           customHeaders: '{"Accept": "application/vnd.github+json"}'
