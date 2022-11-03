@@ -35,7 +35,7 @@ jobs:
           bearerToken: ${{ secrets.GITHUB_TOKEN }}
           customHeaders: '{"Accept": "application/vnd.github+json"}'
     outputs:
-      check-branch-status: ${{ fromJson( steps.check-branch.outputs.requestError ).status }}
+      check-branch-status: ${{ steps.check-branch.outputs.requestError && fromJson( steps.check-branch.outputs.requestError ).status || false }}
       delete-branch-outcome: ${{ steps.delete-branch.outcome }}
 
   update-browserslist-database:
