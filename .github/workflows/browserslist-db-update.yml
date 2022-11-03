@@ -32,7 +32,7 @@ jobs:
           bearerToken: ${{ secrets.GITHUB_TOKEN }}
           customHeaders: '{"Accept": "application/vnd.github+json"}'
     outputs:
-      response: ${{ steps.check-branch.outputs.response }}
+      requestError: ${{ steps.check-branch.outputs.requestError }}
 
   show-response:
     name: Show Response
@@ -41,7 +41,7 @@ jobs:
     steps:
       - name: Show Response
         run: |
-          echo ${{ needs.close-existing-pr.outputs.response }}
+          echo ${{ needs.close-existing-pr.outputs.requestError }}
 
   update-browserslist-database:
     name: Create PR containing Browserslist updates
