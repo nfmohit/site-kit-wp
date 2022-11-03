@@ -5,6 +5,8 @@ on:
     branches:
       - 'test/browserslist-updates'
 
+  workflow_dispatch:
+
 env:
   branch-name: update/browserslist-db
 
@@ -32,7 +34,7 @@ jobs:
           bearerToken: ${{ secrets.GITHUB_TOKEN }}
           customHeaders: '{"Accept": "application/vnd.github+json"}'
     outputs:
-      requestError: ${{ steps.check-branch.outputs.requestError }}
+      check-branch-status: ${{ fromJson( steps.check-branch.outputs.requestError ).status }}
 
   show-response:
     name: Show Response
@@ -41,7 +43,7 @@ jobs:
     steps:
       - name: Show Response
         run: |
-          echo ${{ needs.close-existing-pr.outputs.requestError }}
+          echo ${{ needs.close-existing-pr.outputs.check-branch-status }}
 
   update-browserslist-database:
     name: Create PR containing Browserslist updates
