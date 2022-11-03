@@ -32,6 +32,11 @@ jobs:
           bearerToken: ${{ secrets.GITHUB_TOKEN }}
           customHeaders: '{"Accept": "application/vnd.github+json"}'
 
+  show-response:
+    name: Show Response
+    run: |
+      echo ${{ jobs.close-existing-pr.steps.check-branch.outputs.response }}
+
   update-browserslist-database:
     name: Create PR containing Browserslist updates
     runs-on: ubuntu-latest
