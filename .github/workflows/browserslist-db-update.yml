@@ -15,13 +15,13 @@ jobs:
     steps:
       - name: Check if branch exists
         id: check-branch
+        continue-on-error: true
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://api.github.com/repos/${{ github.repository }}/git/ref/heads/${{ env.branch-name }}'
           method: 'GET'
           bearerToken: ${{ secrets.GITHUB_TOKEN }}
           customHeaders: '{"Accept": "application/vnd.github+json"}'
-          ignoreStatusCodes: '404'
 
       - name: Delete branch
         if: steps.check-branch.outcome == 'success'
